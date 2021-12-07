@@ -1,9 +1,12 @@
 from github import Github   #github api access
 import json                 #for dictionary to string
 import pymongo              #for mongodb access
+import os
 
 #we initialise a PyGithub Github object with our access token
-githubObject = Github("")
+token = os.getenv('GITHUB_PAT')
+print(token)
+githubObject = Github(token)
 
 #getting a user object and building a data dictionary
 user = githubObject.get_user()
