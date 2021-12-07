@@ -1,1 +1,1 @@
-python3 getData.py;
+python3 getData.py

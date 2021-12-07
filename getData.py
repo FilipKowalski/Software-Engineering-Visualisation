@@ -3,7 +3,7 @@ import json                 #for dictionary to string
 import pymongo              #for mongodb access
 
 #we initialise a PyGithub Github object with our access token
-githubObject = Github("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")
+githubObject = Github("")
 
 #getting a user object and building a data dictionary
 user = githubObject.get_user()

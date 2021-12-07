@@ -1,1 +1,1 @@
-python3 dataProcessing.py;
+python3 dataProcessing.py
