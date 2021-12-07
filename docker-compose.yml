@@ -9,3 +9,8 @@ services:
     ports:
       - 27017:27017
     restart: unless-stopped
+
+  frontend:
+    image:   kowalskifilip/react-app:latest
+    ports:
+      - "3000:80"

@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
+const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}, {name: 'Page A', uv: 300, pv: 2400, amt: 2400}, {name: 'Page A', uv: 150, pv: 2400, amt: 2400}, {name: 'Page A', uv: 180, pv: 2400, amt: 2400}, {name: 'Page A', uv: 100, pv: 2400, amt: 2400}, {name: 'Page A', uv: 5, pv: 2400, amt: 2400}];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+	<LineChart width={600} height={300} data={data}>
+		<Line type="monotone" dataKey="uv" stroke="#8884d8" />
+		<CartesianGrid stroke="#ccc" />
+		<XAxis dataKey="name" />
+		<YAxis />
+	</LineChart>
     </div>
   );
 }
