@@ -10,7 +10,7 @@ faker = Faker()
 names = defaultdict(faker.name)
 
 #we initialise a PyGithub Github object with our access token
-token = os.getenv('GITHUB_PAT')
+token = os.getenv("TOKEN")
 print(token)
 githubObject = Github(token)
 

@@ -1,4 +1,4 @@
-python3 cleardb.py
+python3 clearDB.py
 ./gather.sh
 ./process.sh
 ./runserver.sh
