@@ -1,5 +1,5 @@
 from github import Github   #github api access
-from faker import faker     #for anonimysing names
+from faker import Faker     #for anonimysing names
 from collections import defaultdict
 import json                 #for dictionary to string
 import pymongo              #for mongodb access
@@ -17,8 +17,8 @@ githubObject = Github(token)
 #getting a user object and building a data dictionary
 user = githubObject.get_user("sfdye")
 
-userDict = {'user':         user.login,
-            'fullname':     user.name,
+userDict = {'user':         names[user.login].replace(" ",""), #anonimysing
+            'fullname':     names[user.name],
             'location':     user.location,
             'company':      user.company,
             'public_repos': user.public_repos
@@ -58,8 +58,8 @@ print ("followers: " + str(fc))
 fl = user.get_followers()
 
 for f in fl:
-    dct = {'user':         f.login,
-           'fullname':     f.name,
+    dct = {'user':         names[f.login].replace(" ",""),
+           'fullname':     names[f.name],
            'location':     f.location,
            'company':      f.company,
            'public_repos': f.public_repos
