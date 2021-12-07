@@ -69,3 +69,4 @@ for f in fl:
             del dct[k]
 
     print("follower: " + json.dumps(dct))
+    db.githubuser.insert_many([dct])
