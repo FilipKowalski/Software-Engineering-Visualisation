@@ -5,7 +5,7 @@ import json                         #for dictionary to string
 import pymongo                      #for mongodb access
 import os                           #for getting envoiroment variable
 
-def getCommitsInRepoAndStoreToDb(repoName):
+def getCommitsInRepoAndStoreToDb(repoName, DB):
     #getting a repository
     repo = githubObject.get_repo(repoName)
 
@@ -29,6 +29,8 @@ def getCommitsInRepoAndStoreToDb(repoName):
             if v is None:
                 del comDct[k]
         print("commit: " + json.dumps(comDct))
+        db.commits.insert_many([comDct])
+
 
 if __name__ == "__main__":
     #we initialise a PyGithub Github object with our access token
@@ -36,5 +38,12 @@ if __name__ == "__main__":
     print(token)
     githubObject = Github(token)
 
-    getCommitsInRepoAndStoreToDb("nadineel/CSU22012-Algorithm-Data-Structure-Group-Project")
-    getCommitsInRepoAndStoreToDb("lzfellipe/SWENG_project_22")
+    #establish connection
+    conn  ="mongodb://localhost:27017"
+    client = pymongo.MongoClient(conn)
+
+    #create a database
+    db = client.classDB
+
+    getCommitsInRepoAndStoreToDb("nadineel/CSU22012-Algorithm-Data-Structure-Group-Project", db)
+#    getCommitsInRepoAndStoreToDb("lzfellipe/SWENG_project_22", db)
