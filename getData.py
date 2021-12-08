@@ -1,5 +1,4 @@
 from github import Github           #github api access
-from faker import Faker             #for anonimysing names
 from collections import defaultdict #for storing data
 from datetime import datetime       #for changing datetime object to a string
 import json                         #for dictionary to string
@@ -32,10 +31,6 @@ def getCommitsInRepoAndStoreToDb(repoName):
         print("commit: " + json.dumps(comDct))
 
 if __name__ == "__main__":
-    #load the faker and its providers
-    faker = Faker()
-    names = defaultdict(faker.name)
-
     #we initialise a PyGithub Github object with our access token
     token = os.getenv("TOKEN")
     print(token)
