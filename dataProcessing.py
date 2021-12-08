@@ -17,8 +17,8 @@ client = pymongo.MongoClient(conn)
 # Create a database
 db = client.classDB
 
-for user in db.githubuser.find({'location': {'$exists': True}}):
-    pprint.pprint(user)
+for commit in db.commits.find({'commitedInRepoId': {'$exists': True}}):
+    pprint.pprint(commit)
     print()
 
 # now that we have data we want to generate an output that works for a visualisation
