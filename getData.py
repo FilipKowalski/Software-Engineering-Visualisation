@@ -1,6 +1,7 @@
 from github import Github   #github api access
 from faker import Faker     #for anonimysing names
 from collections import defaultdict
+from datetime import datetime
 import json                 #for dictionary to string
 import pymongo              #for mongodb access
 import os
@@ -38,9 +39,11 @@ print ("cleaned dictionary is " + json.dumps(repoDict))
 repoCommits = repo.get_commits()
 
 for commit in repoCommits:
-    comDct = {'commitAuthor': commit.author.name
+    comDct = {
+        'commitAuthor': commit.commit.author.name,
+        'commitDateString':   (commit.commit.author.date).strftime("%Y/%m/%d")
     }
     for k, v in dict(comDct).items():
         if v is None:
             del comDct[k]
-    print("commitAuthor: " + json.dumps(comDct))
+    print("commit: " + json.dumps(comDct))
