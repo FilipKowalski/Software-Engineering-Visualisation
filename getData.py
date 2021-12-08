@@ -37,3 +37,4 @@ if __name__ == "__main__":
     githubObject = Github(token)
 
     getCommitsInRepoAndStoreToDb("nadineel/CSU22012-Algorithm-Data-Structure-Group-Project")
+    getCommitsInRepoAndStoreToDb("lzfellipe/SWENG_project_22")
