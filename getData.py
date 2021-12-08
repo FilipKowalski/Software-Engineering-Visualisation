@@ -47,3 +47,15 @@ for commit in repoCommits:
         if v is None:
             del comDct[k]
     print("commit: " + json.dumps(comDct))
+
+    commitFiles = commit.files
+    fileChangeInfo = {
+        'additions': 0,
+        'deletions': 0,
+        'changes': 0
+    }
+
+    for file in commitFiles:
+        fileChangeInfo['additions'] += file.additions
+        fileChangeInfo['deletions'] += file.deletions
+        fileChangeInfo['changes'] += file.changes
