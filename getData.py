@@ -31,3 +31,11 @@ for k, v in dict(repoDict).items():
         del repoDict[k]
 
 print ("cleaned dictionary is " + json.dumps(repoDict))
+
+
+repoCommits = repo.get_commits()
+
+for commit in repoCommits:
+    comDct = {'commitAuthor': commit.author.name
+    }
+    print("commitAuthor: " + json.dumps(comDct))
