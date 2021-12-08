@@ -39,21 +39,18 @@ print ("cleaned dictionary is " + json.dumps(repoDict))
 repoCommits = repo.get_commits()
 
 for commit in repoCommits:
+    commitFiles = commit.files
+    fileChanges = 0
+
+    for file in commitFiles:
+        fileChanges += file.additions + file.deletions + file.changes
+
     comDct = {
         'commitAuthor': commit.commit.author.name,
-        'commitDateString':   (commit.commit.author.date).strftime("%Y/%m/%d")
+        'commitDateString':   (commit.commit.author.date).strftime("%Y/%m/%d"),
+        'totalChangesInCommit': fileChanges
     }
     for k, v in dict(comDct).items():
         if v is None:
             del comDct[k]
     print("commit: " + json.dumps(comDct))
-
-    commitFiles = commit.files
-    fileChangeInfo = {
-        'totalChangesInFiles': 0
-    }
-
-    for file in commitFiles:
-        fileChangeInfo['totalChangesInFiles'] += file.additions + file.deletions + file.changes
-
-    print("total changes: " + json.dumps(fileChangeInfo))
