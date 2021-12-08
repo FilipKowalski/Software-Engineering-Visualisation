@@ -50,12 +50,8 @@ for commit in repoCommits:
 
     commitFiles = commit.files
     fileChangeInfo = {
-        'additions': 0,
-        'deletions': 0,
-        'changes': 0
+        'totalChangesInFiles': 0
     }
 
     for file in commitFiles:
-        fileChangeInfo['additions'] += file.additions
-        fileChangeInfo['deletions'] += file.deletions
-        fileChangeInfo['changes'] += file.changes
+        fileChangeInfo['totalChangesInFiles'] += file.additions + file.deletions + file.changes
