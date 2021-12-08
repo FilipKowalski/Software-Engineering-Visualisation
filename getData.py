@@ -55,3 +55,5 @@ for commit in repoCommits:
 
     for file in commitFiles:
         fileChangeInfo['totalChangesInFiles'] += file.additions + file.deletions + file.changes
+
+    print("total changes: " + json.dumps(fileChangeInfo))
