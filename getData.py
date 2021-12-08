@@ -18,24 +18,6 @@ githubObject = Github(token)
 #getting a repo object
 repo = githubObject.get_repo("nadineel/CSU22012-Algorithm-Data-Structure-Group-Project")
 
-repoDict = {
-    'id':           repo.id,
-    'name':         repo.name,
-    'owner_login':  repo.owner.login,
-    'language':     repo.language
-}
-
-#deleting null values from the dictionary
-
-print ("dictionary is " + json.dumps(repoDict))
-
-for k, v in dict(repoDict).items():
-    if v is None:
-        del repoDict[k]
-
-print ("cleaned dictionary is " + json.dumps(repoDict))
-
-
 repoCommits = repo.get_commits()
 
 for commit in repoCommits:
