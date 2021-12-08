@@ -15,33 +15,60 @@
  <script src="jquery.csv.min.js"></script>
  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
-<script type="text/javascript"> // load the visualisation API
-  google.load('visualization', '1', { packages: ['corechart', 'controls'] });
-</script>
+  <script type="text/javascript"> // load the visualisation API
+    google.load('visualization', '1', { packages: ['corechart', 'controls'] });
+  </script>
 
-<script type="text/javascript">
-function drawVisualization() {
-   $.get("data.csv", function(csvString) {
-      // transform the CSV string into a 2-dimensional array
-      var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
+  <script type="text/javascript">
+  function drawVisualization() {
+     $.get("data.csv", function(csvString) {
+        // transform the CSV string into a 2-dimensional array
+        var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
 
-      // this new DataTable object holds all the data
-      var data = new google.visualization.arrayToDataTable(arrayData);
-      // CAPACITY - En-route ATFM delay - YY - CHART
-      var crt_ertdlyYY = new google.visualization.ChartWrapper({
-         chartType: 'LineChart',
-         containerId: 'crt_ertdlyYY',
-         dataTable: data,
-         options:{
-            height: 600,
-            title: 'Folowers of a github users repo count',
-            titleTextStyle : {color: 'grey', fontSize: 20},
-         }
-      });
-      crt_ertdlyYY.draw();
-   });
-}
-google.setOnLoadCallback(drawVisualization)
-</script>
+        // this new DataTable object holds all the data
+        var data = new google.visualization.arrayToDataTable(arrayData);
+        // CAPACITY - En-route ATFM delay - YY - CHART
+        var crt_ertdlyYY = new google.visualization.ChartWrapper({
+           chartType: 'LineChart',
+           containerId: 'crt_ertdlyYY',
+           dataTable: data,
+           options:{
+              height: 600,
+              title: 'Folowers of a github users repo count',
+              titleTextStyle : {color: 'grey', fontSize: 20},
+           }
+        });
+        crt_ertdlyYY.draw();
+     });
+  }
+  google.setOnLoadCallback(drawVisualization)
+  </script>
 
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Task', 'Hours per Day'],
+        ['Work',     11],
+        ['Eat',      2],
+        ['Commute',  2],
+        ['Watch TV', 2],
+        ['Sleep',    7]
+      ]);
+
+      var options = {
+        title: 'My Daily Activities'
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+      chart.draw(data, options);
+    }
+  </script>
+</head>
 <div id="crt_ertdlyYY" width=auto height=50%></div>
+<div id="piechart" style="width: 900px; height: 500px;"></div>
