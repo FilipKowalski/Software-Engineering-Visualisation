@@ -24,6 +24,8 @@ repoDict = {
     'language':     repo.language
 }
 
+#deleting null values from the dictionary
+
 print ("dictionary is " + json.dumps(repoDict))
 
 for k, v in dict(repoDict).items():
@@ -38,4 +40,7 @@ repoCommits = repo.get_commits()
 for commit in repoCommits:
     comDct = {'commitAuthor': commit.author.name
     }
+    for k, v in dict(comDct).items():
+        if v is None:
+            del comDct[k]
     print("commitAuthor: " + json.dumps(comDct))
