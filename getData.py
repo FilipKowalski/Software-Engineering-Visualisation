@@ -33,8 +33,8 @@ def getCommitsInRepoAndStoreToDb(repoName, DB, gitHubObject):
             if v is None:
                 del comDct[k]
 
-        #dont store commits that are greater than 10000 to avoid massive files added being added to total changes
-        if comDct.get('totalChangesInCommit') <= 10000:
+        #dont store commits that are greater than 3000 to avoid massive files added being added to total changes
+        if comDct.get('totalChangesInCommit') <= 3000:
             print("commit: " + json.dumps(comDct))
             db.commits.insert_many([comDct])
 

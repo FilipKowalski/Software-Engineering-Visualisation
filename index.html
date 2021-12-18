@@ -30,7 +30,7 @@
         // CAPACITY - En-route ATFM delay - YY - CHART
         var crt_ertdlyYY = new google.visualization.ChartWrapper({
            chartType: 'LineChart',
-           containerId: 'crt_ertdlyYY',
+           containerId: 'SoftwareVisualisationAllCommits',
            dataTable: data,
            options:{
               height: 600,
@@ -43,17 +43,91 @@
   }
   google.setOnLoadCallback(drawVisualization)
   </script>
+
+  <script type="text/javascript">
+  function drawVisualization() {
+     $.get("DataOnBubbleVisionRepoAllCommiters.csv", function(csvString) {
+        // transform the CSV string into a 2-dimensional array
+        var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
+
+        // this new DataTable object holds all the data
+        var data = new google.visualization.arrayToDataTable(arrayData);
+        // CAPACITY - En-route ATFM delay - YY - CHART
+        var crt_ertdlyYY = new google.visualization.ChartWrapper({
+           chartType: 'LineChart',
+           containerId: 'SWENGproject2020AllCommits',
+           dataTable: data,
+           options:{
+              height: 600,
+              title: 'Total Changes in Commits By All Contributors To SWENG_project_22',
+              titleTextStyle : {color: 'grey', fontSize: 20},
+           }
+        });
+        crt_ertdlyYY.draw();
+     });
+  }
+  google.setOnLoadCallback(drawVisualization)
+  </script>
+
+  <script type="text/javascript">
+  function drawVisualization() {
+     $.get("DataOnBubbleVisionRepoFilipsCommits.csv", function(csvString) {
+        // transform the CSV string into a 2-dimensional array
+        var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
+
+        // this new DataTable object holds all the data
+        var data = new google.visualization.arrayToDataTable(arrayData);
+        // CAPACITY - En-route ATFM delay - YY - CHART
+        var crt_ertdlyYY = new google.visualization.ChartWrapper({
+           chartType: 'LineChart',
+           containerId: 'SWENGproject2020FilipKowalskisCommits',
+           dataTable: data,
+           options:{
+              height: 600,
+              title: 'Total Changes in Commits By Filip Kowalski To SWENG_project_22',
+              titleTextStyle : {color: 'grey', fontSize: 20},
+           }
+        });
+        crt_ertdlyYY.draw();
+     });
+  }
+  google.setOnLoadCallback(drawVisualization)
+  </script>
+
 </head>
 <div style="text-align: center;">
   <h1>Software Engineering Visualisation</h1>
   <h2>Visualising total changes in commits in a repository ordered by date of commit</h2>
   <t1>The graphs do not scale dynamically, if the graph is not aligned with the window please refresh the page</t1>
 </div>
-<div id="crt_ertdlyYY" width=auto height=50%></div>
+
+<div id="SoftwareVisualisationAllCommits" width=auto height=50%></div>
 <div style="text-align: center; margin-left: 80px; margin-right: 80px;">
   <t1>
     We can see that measuring total changes made in commits to a repository is not a good way to measure the productivity of a software engineer by simply looking at the grah.
     The massive spike at date 2021/12/07 does not mean i was particularly productive in that commit, i simply scrapped the use of a javascript framework for this visualisation which
-    involved the deletion of many files and in conjunction many lines of code
+    involved the deletion of many files and in conjunction many lines of code. Even if i delete commits that are larger than three thousand changes we still cannot use this
+    flawed metric to measure software engineers.
+  </t1>
+</div>
+
+<div id="SWENGproject2020AllCommits" width=auto height=50%></div>
+<div style="text-align: center; margin-left: 80px; margin-right: 80px;">
+  <t1>
+    Here we can see that a similar spike is alswe present where files have been added or deleted
+  </t1>
+</div>
+
+<div id="SWENGproject2020FilipKowalskisCommits" width=auto height=50%></div>
+<div style="text-align: center; margin-left: 80px; margin-right: 80px; margin-bottom: 100px">
+  <t1>
+    From the data gathered that was used to create this visualisation we can see that total changed lines of code cannot be used as a reliable metric to measure software engineers performance
+    mainly because of the point mentioned above, i go into why lines of code cannot be used as a way to measure a single software engineers performace in more detail in my report
+  </t1>
+  <t1>
+    Total lines of code changed however can be usefull to visualise the progress of the project, if we see a spike in the graph that is an outlier among other commits
+    we could come to the conclusion that a whole part of the project has been scrapped or code has been reused from other projects, with some research we can figure out that 
+    maybe there has been problems in the development. for example from the first graph above you can see that in one commit i changed nearly two and a half thousands lines of code,
+    this could indicate a change of tool or approaches used to complete the project, this is true in this example as i dropped the use of react in favour of vanilla javascript and html
   </t1>
 </div>
