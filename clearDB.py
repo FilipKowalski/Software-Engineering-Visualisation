@@ -14,4 +14,4 @@ client = pymongo.MongoClient(conn)
 # Create a database
 db = client.classDB
 
-db.githubuser.delete_many({})
+db.commits.delete_many({})

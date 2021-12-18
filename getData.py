@@ -5,7 +5,7 @@ import json                         #for dictionary to string
 import pymongo                      #for mongodb access
 import os                           #for getting envoiroment variable
 
-def getCommitsInRepoAndStoreToDb(repoName, DB):
+def getCommitsInRepoAndStoreToDb(repoName, DB, gitHubObject):
     #getting a repository
     repo = githubObject.get_repo(repoName)
 
@@ -15,7 +15,7 @@ def getCommitsInRepoAndStoreToDb(repoName, DB):
     for commit in repoCommits:
         commitFiles = commit.files
         fileChanges = 0
-        
+
         for file in commitFiles:
             fileChanges += file.additions + file.deletions + file.changes
 
@@ -25,11 +25,18 @@ def getCommitsInRepoAndStoreToDb(repoName, DB):
             'commitDateString':   (commit.commit.author.date).strftime("%Y/%m/%d"),
             'totalChangesInCommit': fileChanges
         }
+
+        print(dict(comDct).items())
+
+        #if there are null values, delte them
         for k, v in dict(comDct).items():
             if v is None:
                 del comDct[k]
-        print("commit: " + json.dumps(comDct))
-        db.commits.insert_many([comDct])
+
+        #dont store commits that are greater than 10000 to avoid massive files added being added to total changes
+        if comDct.get('totalChangesInCommit') <= 10000:
+            print("commit: " + json.dumps(comDct))
+            db.commits.insert_many([comDct])
 
 
 if __name__ == "__main__":
@@ -45,5 +52,5 @@ if __name__ == "__main__":
     #create a database
     db = client.classDB
 
-    getCommitsInRepoAndStoreToDb("nadineel/CSU22012-Algorithm-Data-Structure-Group-Project", db)
+    getCommitsInRepoAndStoreToDb("FilipKowalski/Software-Engineering-Visualisation", db, githubObject)
 #    getCommitsInRepoAndStoreToDb("lzfellipe/SWENG_project_22", db)

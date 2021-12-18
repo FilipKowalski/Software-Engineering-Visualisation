@@ -15,26 +15,20 @@ client = pymongo.MongoClient(conn)
 # Create a database
 db = client.classDB
 
-#for commit in db.commits.find({'commitAuthor': "FilipKowalski",
-#                               'commitedInRepoId': 356608816
-#                               }):
-#    pprint.pprint(commit)
-#    print()
-
 # now that we have data we want to generate an output that works for a visualisation
 #im generating a line graph, for this i will need a CSV file containing the date of commit and the number of lines changed
 #it will be in this format
 #Date,RepoCount,
 
-#get the commits in the repo of id 356608816 which is a group project for an algorithms and
+#get the commits in the repo of id 430669465 which is a group project for an algorithms and
 #data structures module in 2nd year
 
 #write the data about commits done by me in this repository
 
-with open('data.csv', 'w') as f:
+with open('DataOnSoftwareVisualisationRepo.csv', 'w') as f:
     f.write('Date,TotalChanges\n')
     dct = db.commits.find({'commitAuthor': "FilipKowalski",
-                              'commitedInRepoId': 356608816
+                              'commitedInRepoId': 430669465
                             })
     for commit in dct:
         pprint.pprint(commit)
