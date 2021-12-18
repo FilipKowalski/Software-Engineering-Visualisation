@@ -23,7 +23,30 @@ db = client.classDB
 #get the commits in the repo of id 430669465 which is a group project for an algorithms and
 #data structures module in 2nd year
 
-#write the data about commits done by me in this repository
+#write the data about commits done by me in the software engineering visualisation repository
+
+with open('DataOnSoftwareVisualisationRepo.csv', 'w') as f:
+    f.write('Date,TotalChanges\n')
+    dct = db.commits.find({'commitAuthor': "FilipKowalski",
+                              'commitedInRepoId': 430669465
+                            })
+    for commit in dct:
+        pprint.pprint(commit)
+        print()
+        f.write(commit['commitDateString'] + ',' + str(commit['totalChangesInCommit']) + '\n')
+
+#write data about all commits in the bubble vision website repository i worked on
+with open('DataOnSoftwareVisualisationRepo.csv', 'w') as f:
+    f.write('Date,TotalChanges\n')
+    dct = db.commits.find({'commitAuthor': "FilipKowalski",
+                              'commitedInRepoId': 430669465
+                            })
+    for commit in dct:
+        pprint.pprint(commit)
+        print()
+        f.write(commit['commitDateString'] + ',' + str(commit['totalChangesInCommit']) + '\n')
+
+#write data about My commits in the SWENNG project bubble vision website repository i worked on
 
 with open('DataOnSoftwareVisualisationRepo.csv', 'w') as f:
     f.write('Date,TotalChanges\n')
