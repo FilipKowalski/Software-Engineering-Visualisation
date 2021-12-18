@@ -36,10 +36,9 @@ with open('DataOnSoftwareVisualisationRepo.csv', 'w') as f:
         f.write(commit['commitDateString'] + ',' + str(commit['totalChangesInCommit']) + '\n')
 
 #write data about all commits in the bubble vision website repository i worked on
-with open('DataOnSoftwareVisualisationRepo.csv', 'w') as f:
+with open('DataOnBubbleVisionRepoAllCommiters.csv', 'w') as f:
     f.write('Date,TotalChanges\n')
-    dct = db.commits.find({'commitAuthor': "FilipKowalski",
-                              'commitedInRepoId': 430669465
+    dct = db.commits.find({  'commitedInRepoId': 340665240
                             })
     for commit in dct:
         pprint.pprint(commit)
@@ -48,10 +47,10 @@ with open('DataOnSoftwareVisualisationRepo.csv', 'w') as f:
 
 #write data about My commits in the SWENNG project bubble vision website repository i worked on
 
-with open('DataOnSoftwareVisualisationRepo.csv', 'w') as f:
+with open('DataOnBubbleVisionRepoFilipsCommits.csv', 'w') as f:
     f.write('Date,TotalChanges\n')
     dct = db.commits.find({'commitAuthor': "FilipKowalski",
-                              'commitedInRepoId': 430669465
+                              'commitedInRepoId': 340665240
                             })
     for commit in dct:
         pprint.pprint(commit)

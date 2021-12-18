@@ -52,5 +52,5 @@ if __name__ == "__main__":
     #create a database
     db = client.classDB
 
-#    getCommitsInRepoAndStoreToDb("FilipKowalski/Software-Engineering-Visualisation", db, githubObject)
+    getCommitsInRepoAndStoreToDb("FilipKowalski/Software-Engineering-Visualisation", db, githubObject)
     getCommitsInRepoAndStoreToDb("lzfellipe/SWENG_project_22", db, githubObject)
