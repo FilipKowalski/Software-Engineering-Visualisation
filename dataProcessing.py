@@ -1,14 +1,12 @@
 
-# a script to do python based access to the github api
-# step 4 - Let's store our data in a mongodb
-
-print("Current data in the DB is");
-
+#a script to optain the data from the MongoDB and print it out to a file in csv format
 
 import pymongo              # for mongodb access
 import pprint               # for pretty printing db data
 
-#Let's get the user object from the db
+print("Current data in the DB is");
+
+#Let's get the Commit from the db
 
 # Establish connection
 conn = "mongodb://localhost:27017"
@@ -17,33 +15,28 @@ client = pymongo.MongoClient(conn)
 # Create a database
 db = client.classDB
 
-for commit in db.commits.find({'commitedInRepoId': {'$exists': True}}):
-    pprint.pprint(commit)
-    print()
+#for commit in db.commits.find({'commitAuthor': "FilipKowalski",
+#                               'commitedInRepoId': 356608816
+#                               }):
+#    pprint.pprint(commit)
+#    print()
 
 # now that we have data we want to generate an output that works for a visualisation
-# I'm going to generate a simple bar chart that shows a count of public repos of each
-# user in the database. Note that this isn't a great example of a visualisation of
-# inteeresting data, but it's good enough for the purpose of demonstrating how to
-# complete the link between data gathering and data visualisation.
+#im generating a line graph, for this i will need a CSV file containing the date of commit and the number of lines changed
+#it will be in this format
+#Date,RepoCount,
 
-# First let's describe the data structure our visualisation needs. Look to index.html
-# for the code that uses it.
+#get the commits in the repo of id 356608816 which is a group project for an algorithms and
+#data structures module in 2nd year
 
-# I've previously discussed the use of json data and i recommend generating and transmitting data in json format.
-# However because this example is so simple, I'm goign to write the data set out in csv format
-# It will look like this:
-#           User, Repo Count
-#           Ben,12
-#           Bill,2
-#           Jack,34
-#           Jill 50
-
+#write the data about commits done by me in this repository
 
 with open('data.csv', 'w') as f:
-    f.write('User,RepoCount\n')
-    dct = db.githubuser.find({'user': {'$exists': True}})
-    for user in dct:
-        pprint.pprint(user)
+    f.write('Date,TotalChanges\n')
+    dct = db.commits.find({'commitAuthor': "FilipKowalski",
+                              'commitedInRepoId': 356608816
+                            })
+    for commit in dct:
+        pprint.pprint(commit)
         print()
-        f.write(user['user'] + ',' + str(user['public_repos']) + '\n')
+        f.write(commit['commitDateString'] + ',' + str(commit['totalChangesInCommit']) + '\n')

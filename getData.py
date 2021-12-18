@@ -15,7 +15,7 @@ def getCommitsInRepoAndStoreToDb(repoName, DB):
     for commit in repoCommits:
         commitFiles = commit.files
         fileChanges = 0
-
+        
         for file in commitFiles:
             fileChanges += file.additions + file.deletions + file.changes
 
